@@ -6,7 +6,7 @@ import {ReactComponent as DislikeIcon} from "../../../assets/svg/Dislike.svg";
 
 export default class MoviePreview extends React.Component {
     onTitleClick = () => {
-        this.props.onSelect(this.props.movie);
+        this.props.setSelected(this.props.movie.id);
     };
 
     onLikeClick = () => {
@@ -18,7 +18,7 @@ export default class MoviePreview extends React.Component {
     };
 
     onRatingSelect = (rating) => {
-        this.props.onRatingSelect({
+        this.props.setRating({
             id: this.props.movie.id,
             stars: rating
         });

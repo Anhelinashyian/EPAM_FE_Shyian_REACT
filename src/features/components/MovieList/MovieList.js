@@ -7,11 +7,16 @@ export default function MovieList(props) {
     if (moviesList.length) {
         return <div className={styles.menu__list}>
             {moviesList.map((movie, i) =>
-                <MoviePreview key={"movie" + i} movie={movie} onSelect={props.onSelect}
-                              incrementLikes={props.incrementLikes} decrementLikes={props.decrementLikes} onRatingSelect={props.onRatingSelect}/>
+                <MoviePreview
+                    key={`movie-${i}`}
+                    movie={movie}
+                    setRating={props.setRating}
+                    decrementLikes={props.decrementLikes}
+                    incrementLikes={props.incrementLikes}
+                    setSelected={props.setSelected}
+                />
             )}
         </div>
     }
-
     return <div>There is no films</div>
 }
