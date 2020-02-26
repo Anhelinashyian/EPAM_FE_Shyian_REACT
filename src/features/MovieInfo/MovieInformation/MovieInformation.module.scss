@@ -1,4 +1,4 @@
-@import "src/common/common";
+@import "../../../common/common";
 
 .col_4 {
   @include make-lg-column(4);
