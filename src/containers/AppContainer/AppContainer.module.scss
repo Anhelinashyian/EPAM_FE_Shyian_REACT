@@ -1,6 +1,6 @@
-@import "../../../common/common";
-@import "../../../../node_modules/bootstrap-sass/assets/stylesheets/bootstrap/buttons";
-@import "../../../../node_modules/bootstrap-sass/assets/stylesheets/bootstrap/alerts";
+@import "../../common/common";
+@import "../../../node_modules/bootstrap-sass/assets/stylesheets/bootstrap/buttons";
+@import "../../../node_modules/bootstrap-sass/assets/stylesheets/bootstrap/alerts";
 
 .col_4 {
   @include make-lg-column(4);

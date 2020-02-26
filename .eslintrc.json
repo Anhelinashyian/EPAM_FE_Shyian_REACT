@@ -1,5 +1,6 @@
 {
   "env": {
+    "node": true,
     "browser": true,
     "es6": true
   },
@@ -7,6 +8,7 @@
     "eslint:recommended",
     "plugin:react/recommended"
   ],
+  "parser": "babel-eslint",
   "globals": {
     "Atomics": "readonly",
     "SharedArrayBuffer": "readonly"
