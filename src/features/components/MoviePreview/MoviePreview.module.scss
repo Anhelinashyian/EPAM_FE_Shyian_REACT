@@ -1,0 +1,60 @@
+.movie {
+  width: 20em;
+  height: 20em;
+  display: flex;
+  flex-flow: row wrap;
+  background-color: #eef2f9;
+  border-radius: 0.5em;
+  margin: 1em;
+  padding: 1em;
+
+  &__likes {
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+  }
+
+  &__like {
+    transform: scale(0.9);
+    cursor: pointer;
+    transition: all 0.1s;
+
+    &:hover {
+      transform: scale(1);
+    }
+  }
+
+  &__like_count {
+    padding: 0.5em 0.4em;
+    border-top: 0.1em solid gray;
+  }
+
+  &__poster {
+    height: 15em;
+    width: 12em;
+    padding: 1em 0 1em 1.5em;
+  }
+
+  &__title {
+    cursor: pointer;
+    text-align: center;
+    transition: all 0.1s;
+
+    &:hover {
+      font-weight: bolder;
+      transform: scale(1.1);
+    }
+  }
+
+  &__rating {
+    width: 100%;
+    text-align: center;
+    transform: scale(1.3);
+    transition: all 0.1s;
+
+    &:hover {
+      transform: scale(1.4);
+    }
+  }
+}
+
