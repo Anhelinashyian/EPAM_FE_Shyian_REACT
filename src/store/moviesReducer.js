@@ -1,11 +1,11 @@
 import {
   SET_MOVIES,
-  SET_SELECTED,
   SET_RATING,
   SET_LIKES,
   SORT_BY_LIKES,
   SORT_BY_RATING,
-  SET_SEARCH_VALUE,
+  DELETE_MOVIE,
+  EDIT_MOVIE,
 } from './types';
 
 const initialState = {
@@ -13,16 +13,12 @@ const initialState = {
   selected: null,
   sortedByLikes: false,
   sortedByRating: false,
-  searchValue: '',
 };
 
-export const homepageReducer = (state = initialState, action) => {
+export const moviesReducer = (state = initialState, action) => {
   switch (action.type) {
     case SET_MOVIES:
       return {...state, movies: action.payload};
-
-    case SET_SELECTED:
-      return {...state, selected: action.payload};
 
     case SET_LIKES: {
       const movieIndex = state.movies.findIndex((item) => item.id === action.payload.id);
@@ -78,11 +74,21 @@ export const homepageReducer = (state = initialState, action) => {
       return {...state, movies, sortedByLikes: !sorted};
     }
 
-    case SET_SEARCH_VALUE:
-      return {...state, searchValue: action.payload};
+    case DELETE_MOVIE: {
+      const movieIndex = state.movies.findIndex((item) => item.id === action.payload);
+      const movies = [...state.movies];
 
-    default:
-      console.log('Unknown action type');
+      movies.splice(movieIndex, 1);
+      return {...state, movies};
+    }
+
+    case EDIT_MOVIE: {
+      const movieIndex = state.movies.findIndex((item) => item.id === action.payload.id);
+      const movies = [...state.movies];
+
+      movies[movieIndex] = action.payload;
+      return {...state, movies};
+    }
   }
   return state;
 };

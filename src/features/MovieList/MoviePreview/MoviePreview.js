@@ -5,7 +5,7 @@ import {ReactComponent as LikeIcon} from '../../../assets/svg/Like.svg';
 import {ReactComponent as DislikeIcon} from '../../../assets/svg/Dislike.svg';
 import PropTypes from 'prop-types';
 
-export default class MoviePreview extends React.Component {
+class MoviePreview extends React.Component {
   onTitleClick = () => {
     this.props.setSelected(this.props.movie.id);
   };
@@ -63,7 +63,6 @@ MoviePreview.propTypes = {
     director: PropTypes.string,
     description: PropTypes.string,
   }),
-  setSelected: PropTypes.func,
   setRating: PropTypes.func,
   setLikes: PropTypes.func,
 };

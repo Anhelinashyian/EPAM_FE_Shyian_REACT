@@ -1,6 +1,10 @@
 import {combineReducers} from 'redux';
-import {homepageReducer} from './homepageReducer';
+import {moviesReducer} from './moviesReducer';
+import {actorsReducer} from './actorsReducer';
+import {searchReducer} from './searchReducer';
 
 export const rootReducer = combineReducers({
-  homepageReducer,
+  moviesReducer,
+  actorsReducer,
+  searchReducer,
 });

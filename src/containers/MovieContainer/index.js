@@ -1,7 +1,5 @@
 import {connect} from 'react-redux';
 import {
-  setMovies,
-  setSelected,
   sortByLikes,
   sortByRating,
   setLikes,
@@ -13,16 +11,14 @@ import AppContainer from './AppContainer';
 
 const mapStateToProps = (state) => {
   return ({
-    movies: state.homepageReducer.movies,
-    selected: state.homepageReducer.selected,
-    sortedByLikes: state.homepageReducer.sortedByLikes,
-    searchValue: state.homepageReducer.searchValue,
+    movies: state.moviesReducer.movies,
+    sortedByLikes: state.moviesReducer.sortedByLikes,
+    searchValue: state.searchReducer.searchValue,
+    actors: state.actorsReducer.actors,
   });
 };
 
 const mapDispatchToProps = {
-  setMovies,
-  setSelected,
   sortByRating,
   sortByLikes,
   setLikes,

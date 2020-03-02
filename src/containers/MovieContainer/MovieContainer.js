@@ -5,13 +5,7 @@ import MovieList from '../../features/MovieList/MovieList/MovieList';
 import MovieInformation from '../../features/MovieInfo/MovieInformation/MovieInformation';
 import PropTypes from 'prop-types';
 
-export default class AppContainer extends React.Component {
-  componentDidMount() {
-    fetch('json/films.json').then((response) => response.json()).then((data) => {
-      this.props.setMovies(data.movies);
-    });
-  }
-
+export default class MovieContainer extends React.Component {
   onClickByLike = () => {
     this.props.sortByLikes();
   };
@@ -35,12 +29,29 @@ export default class AppContainer extends React.Component {
     return movies;
   };
 
+  getMovieList = () => {
+    const allMovies = this.getMovies();
+
+    return allMovies.length
+      ? <div className={styles.menu__list}>
+        {allMovies.map((movie, i) =>
+          <MoviePreview
+            key={`movie-${i}`}
+            movie={movie}
+            setRating={this.props.setRating}
+            setLikes={this.props.setLikes}
+          />,
+        )},
+      </div>
+      : <div>There is no films</div>
+  };
+
   render() {
     const allMovies = this.getMovies();
     const selectedMovie = this.props.movies.find((item) => item.id === this.props.selected);
 
     return <div className={`${styles.container} ${styles.wrapper}`}>
-      <Header/>
+      <Header logOut='logout'/>
       <div className={styles.row}>
         <div className={`${styles.col_8} ${styles.menu__container}`}>
           <h1 className={styles.sort__title}>Sort movies</h1>
@@ -53,17 +64,7 @@ export default class AppContainer extends React.Component {
             </button>
           </div>
           <input className={styles.search} type='search' placeholder='Search by name' onInput={this.onSearchInput}/>
-          <MovieList
-            list={allMovies}
-            setRating={this.props.setRating}
-            setLikes={this.props.setLikes}
-            setSelected={this.props.setSelected}
-          />
-        </div>
-        <div className={`${styles.col_4} ${styles.film__container}`}>
-          {selectedMovie
-            ? <MovieInformation movie={selectedMovie}/>
-            : <div className={`${styles.alert} ${styles['alert-info']}`}>Please select a film</div>}
+          {this.getMovieList()}
         </div>
       </div>
     </div>;
@@ -73,12 +74,9 @@ export default class AppContainer extends React.Component {
 AppContainer.propTypes = {
   setRating: PropTypes.func,
   setLikes: PropTypes.func,
-  setSelected: PropTypes.func,
   setSearchValue: PropTypes.func,
-  selected: PropTypes.any,
-  movies: PropTypes.array,
+  movies: PropTypes.arrayOf(PropTypes.object),
   searchValue: PropTypes.string,
   sortByRating: PropTypes.func,
   sortByLikes: PropTypes.func,
-  setMovies: PropTypes.func,
 };

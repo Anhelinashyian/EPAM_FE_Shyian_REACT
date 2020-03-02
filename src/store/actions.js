@@ -1,20 +1,17 @@
 import {
   SET_MOVIES,
-  SET_SELECTED,
   SET_LIKES,
   SET_RATING,
   SORT_BY_RATING,
   SORT_BY_LIKES,
   SET_SEARCH_VALUE,
+  SET_ACTORS,
+  DELETE_MOVIE,
+  EDIT_MOVIE,
 } from './types';
 
 export const setMovies = (payload) => ({
   type: SET_MOVIES,
-  payload,
-});
-
-export const setSelected = (payload) => ({
-  type: SET_SELECTED,
   payload,
 });
 
@@ -38,5 +35,20 @@ export const sortByLikes = () => ({
 
 export const setSearchValue = (payload) => ({
   type: SET_SEARCH_VALUE,
+  payload,
+});
+
+export const setActors = (payload) => ({
+  type: SET_ACTORS,
+  payload,
+});
+
+export const deleteMovie = (payload) => ({
+  type: DELETE_MOVIE,
+  payload,
+});
+
+export const editMovie = (payload) => ({
+  type: EDIT_MOVIE,
   payload,
 });
