@@ -1,6 +1,6 @@
-@import "src/common/common";
-@import "../../../../node_modules/bootstrap-sass/assets/stylesheets/bootstrap/_buttons";
-@import "../../../../node_modules/bootstrap-sass/assets/stylesheets/bootstrap/_alerts";
+@import "../../common/common";
+@import "../../../node_modules/bootstrap-sass/assets/stylesheets/bootstrap/buttons";
+@import "../../../node_modules/bootstrap-sass/assets/stylesheets/bootstrap/alerts";
 
 .col_4 {
   @include make-lg-column(4);
@@ -45,4 +45,10 @@
   margin: auto;
   outline: none;
   display: block;
+}
+
+.menu__list {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: flex-start;
 }

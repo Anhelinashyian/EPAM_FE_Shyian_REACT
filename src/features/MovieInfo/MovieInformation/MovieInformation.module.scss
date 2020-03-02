@@ -1,4 +1,5 @@
-@import "src/common/common";
+@import "../../../common/common";
+@import "../../../../node_modules/bootstrap-sass/assets/stylesheets/bootstrap/buttons";
 
 .col_4 {
   @include make-lg-column(4);
@@ -8,11 +9,18 @@
   @include make-lg-column(8);
 }
 
+.btn {
+  display: block;
+  width: 10em;
+  margin: 1em 0;
+}
+
 .movie {
   background-color: #eef2f9;
   padding: 0.5em;
   border-radius: 0.7em;
-  margin-top: 2em;
+  width: 60%;
+  margin: 5em auto;
 
   &__title {
     font-size: 1.5em;
@@ -35,5 +43,14 @@
 
   &__info {
     margin-bottom: 0.7em;
+  }
+}
+.link {
+  cursor: pointer;
+  padding: 0.3em;
+  color: darkblue;
+
+  &:hover {
+    text-decoration: underline;
   }
 }
