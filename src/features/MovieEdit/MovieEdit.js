@@ -1,6 +1,8 @@
 import React from 'react';
 import styles from './MovieEdit.module.scss';
 import {withRouter} from 'react-router';
+import * as client from '../../utils/model/model';
+import PropTypes from 'prop-types';
 
 class MovieEdit extends React.Component {
   constructor(props) {
@@ -55,8 +57,8 @@ class MovieEdit extends React.Component {
 
   onSubmitClick = (event) => {
     event.preventDefault();
-    this.props.editMovie(this.state.selected);
-    this.props.history.push(`/movie/${this.state.selected.id}`);
+    client.editMovie(this.state.selected)
+      .then(() => this.props.history.push(`/movie/${this.state.selected.id}`))
   };
 
   onGoBackClick = () => {
@@ -105,4 +107,17 @@ class MovieEdit extends React.Component {
   }
 }
 
+MovieEdit.propTypes = {
+  selected: PropTypes.shape({
+    id: PropTypes.number,
+    title: PropTypes.string,
+    posterUrl: PropTypes.string,
+    stars: PropTypes.number,
+    likes: PropTypes.number,
+    genres: PropTypes.arrayOf(PropTypes.string),
+    actorsIds: PropTypes.arrayOf(PropTypes.number),
+    director: PropTypes.string,
+    description: PropTypes.string,
+  }),
+}
 export default withRouter(MovieEdit);

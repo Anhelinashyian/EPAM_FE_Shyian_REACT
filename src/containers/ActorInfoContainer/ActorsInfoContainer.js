@@ -5,18 +5,15 @@ import styles from './ActorsInfoContainer.module.scss';
 import PropTypes from 'prop-types';
 
 export default class ActorsInfoContainer extends React.Component {
-  getSelectedActor = () => {
+  componentDidMount() {
     const selectedActorId = +this.props.computedMatch.params.id;
-    const {actors} = this.props;
-
-    if (selectedActorId !== undefined && actors) {
-      return actors.find((item) => item.id === selectedActorId);
+    if (selectedActorId !== undefined) {
+      this.props.fetchSelectedActor(selectedActorId);
     }
-    return null;
-  };
+  }
 
   render() {
-    const selectedActor = this.getSelectedActor();
+    const {selectedActor} = this.props;
     return <div className={styles.wrapper}>
       <Header logOut='logout' movies='movies'/>
       <div className={styles.row}>
@@ -33,4 +30,11 @@ export default class ActorsInfoContainer extends React.Component {
 
 ActorsInfoContainer.propTypes = {
   actors: PropTypes.arrayOf(PropTypes.object),
+  fetchSelectedActor: PropTypes.func,
+  selectedActor: PropTypes.shape({
+    id: PropTypes.number,
+    posterUrl: PropTypes.string,
+    name: PropTypes.string,
+    description: PropTypes.string,
+  })
 };

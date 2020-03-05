@@ -18,6 +18,6 @@ export default function Alert({show, children}) {
 }
 
 Alert.propTypes = {
-  show: PropTypes.string,
+  show: PropTypes.bool,
   children: PropTypes.any,
 };

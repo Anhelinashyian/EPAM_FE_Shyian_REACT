@@ -1,5 +1,6 @@
-import {createStore} from 'redux';
 import {rootReducer} from './rootReducer';
+import {createStore, applyMiddleware, compose} from 'redux';
+import thunk from 'redux-thunk';
 
 let devTools = (f) => f;
 
@@ -14,5 +15,8 @@ if (enableReduxDevtools) {
 export const configureStore = (initialState = {}) => createStore(
   rootReducer,
   initialState,
-  devTools,
+  compose(
+    applyMiddleware(thunk),
+    devTools,
+  ),
 );

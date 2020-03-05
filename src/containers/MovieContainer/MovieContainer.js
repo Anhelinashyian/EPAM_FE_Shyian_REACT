@@ -1,11 +1,15 @@
 import React from 'react';
-import styles from './AppContainer.module.scss';
+import styles from './MovieContainer.module.scss';
 import Header from '../../components/Header/Header';
-import MovieList from '../../features/MovieList/MovieList/MovieList';
-import MovieInformation from '../../features/MovieInfo/MovieInformation/MovieInformation';
 import PropTypes from 'prop-types';
+import MoviePreview from '../../features/MovieList/MoviePreview/MoviePreview';
+import {fetchAllMovies} from "../../store/actions";
 
 export default class MovieContainer extends React.Component {
+  componentDidMount() {
+    this.props.fetchAllMovies();
+  }
+
   onClickByLike = () => {
     this.props.sortByLikes();
   };
@@ -32,28 +36,30 @@ export default class MovieContainer extends React.Component {
   getMovieList = () => {
     const allMovies = this.getMovies();
 
-    return allMovies.length
+    return allMovies
       ? <div className={styles.menu__list}>
         {allMovies.map((movie, i) =>
           <MoviePreview
             key={`movie-${i}`}
             movie={movie}
-            setRating={this.props.setRating}
-            setLikes={this.props.setLikes}
+            updateRating={this.props.updateRating}
+            updateLikes={this.props.updateLikes}
           />,
         )},
       </div>
-      : <div>There is no films</div>
+      : <div>There is no films</div>;
   };
 
   render() {
-    const allMovies = this.getMovies();
-    const selectedMovie = this.props.movies.find((item) => item.id === this.props.selected);
+    const {loading, error} = this.props;
+    if (error) {
+      return <div>Something is wrong...</div>
+    }
 
     return <div className={`${styles.container} ${styles.wrapper}`}>
       <Header logOut='logout'/>
       <div className={styles.row}>
-        <div className={`${styles.col_8} ${styles.menu__container}`}>
+        <div className={`${styles.col_11} ${styles.menu__container}`}>
           <h1 className={styles.sort__title}>Sort movies</h1>
           <div className={styles['btn-container']}>
             <button onClick={this.onClickByLike} className={`${styles.btn} ${styles['btn-primary']}`}>
@@ -64,19 +70,22 @@ export default class MovieContainer extends React.Component {
             </button>
           </div>
           <input className={styles.search} type='search' placeholder='Search by name' onInput={this.onSearchInput}/>
-          {this.getMovieList()}
+          {loading ? <h1>Loading...</h1> : this.getMovieList()}
         </div>
       </div>
     </div>;
   }
 }
 
-AppContainer.propTypes = {
-  setRating: PropTypes.func,
-  setLikes: PropTypes.func,
+MovieContainer.propTypes = {
+  updateRating: PropTypes.func,
+  updateLikes: PropTypes.func,
   setSearchValue: PropTypes.func,
   movies: PropTypes.arrayOf(PropTypes.object),
   searchValue: PropTypes.string,
   sortByRating: PropTypes.func,
   sortByLikes: PropTypes.func,
+  error: PropTypes.bool,
+  loading: PropTypes.bool,
+  fetchAllMovies: PropTypes.func,
 };

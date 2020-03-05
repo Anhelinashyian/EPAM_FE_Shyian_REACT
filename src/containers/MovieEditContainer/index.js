@@ -1,15 +1,15 @@
 import {connect} from 'react-redux';
 import MovieEditContainer from './MovieEditContainer';
-import {editMovie} from '../../store/actions';
+import {fetchSelectedMovie} from '../../store/actions';
 
 const mapStateToProps = (state) => {
   return ({
-    movies: state.moviesReducer.movies,
+    selectedMovie: state.moviesReducer.selectedMovie,
   });
 };
 
 const mapDispatchToProps = {
-  editMovie,
+  fetchSelectedMovie,
 };
 
 const withConnect = connect(mapStateToProps, mapDispatchToProps);

@@ -2,16 +2,19 @@ import {connect} from 'react-redux';
 import {
   sortByLikes,
   sortByRating,
-  setLikes,
-  setRating,
+  updateLikes,
   setSearchValue,
+  fetchAllMovies,
+  updateRating,
 } from '../../store/actions';
 
-import AppContainer from './AppContainer';
+import MovieContainer from './MovieContainer';
 
 const mapStateToProps = (state) => {
   return ({
     movies: state.moviesReducer.movies,
+    loading: state.moviesReducer.loading,
+    error: state.moviesReducer.error,
     sortedByLikes: state.moviesReducer.sortedByLikes,
     searchValue: state.searchReducer.searchValue,
     actors: state.actorsReducer.actors,
@@ -21,11 +24,12 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = {
   sortByRating,
   sortByLikes,
-  setLikes,
-  setRating,
+  updateLikes,
+  updateRating,
   setSearchValue,
+  fetchAllMovies,
 };
 
 const withConnect = connect(mapStateToProps, mapDispatchToProps);
 
-export default withConnect(AppContainer);
+export default withConnect(MovieContainer);

@@ -4,13 +4,16 @@ import {
   SET_LIKES,
   SORT_BY_LIKES,
   SORT_BY_RATING,
-  DELETE_MOVIE,
-  EDIT_MOVIE,
+  MOVIES_LOADING_START,
+  MOVIES_DATA_ERROR,
+  SET_SELECTED_MOVIE,
 } from './types';
 
 const initialState = {
-  movies: [],
-  selected: null,
+  movies: null,
+  selectedMovie: null,
+  loading: false,
+  error: false,
   sortedByLikes: false,
   sortedByRating: false,
 };
@@ -18,7 +21,16 @@ const initialState = {
 export const moviesReducer = (state = initialState, action) => {
   switch (action.type) {
     case SET_MOVIES:
-      return {...state, movies: action.payload};
+      return {...state, movies: action.payload, loading: false};
+
+    case MOVIES_LOADING_START:
+      return {...state, loading: true};
+
+    case MOVIES_DATA_ERROR:
+      return {...state, loading: false, error: action.payload};
+
+    case SET_SELECTED_MOVIE:
+      return {...state, selectedMovie: action.payload};
 
     case SET_LIKES: {
       const movieIndex = state.movies.findIndex((item) => item.id === action.payload.id);
@@ -72,22 +84,6 @@ export const moviesReducer = (state = initialState, action) => {
         });
       }
       return {...state, movies, sortedByLikes: !sorted};
-    }
-
-    case DELETE_MOVIE: {
-      const movieIndex = state.movies.findIndex((item) => item.id === action.payload);
-      const movies = [...state.movies];
-
-      movies.splice(movieIndex, 1);
-      return {...state, movies};
-    }
-
-    case EDIT_MOVIE: {
-      const movieIndex = state.movies.findIndex((item) => item.id === action.payload.id);
-      const movies = [...state.movies];
-
-      movies[movieIndex] = action.payload;
-      return {...state, movies};
     }
   }
   return state;

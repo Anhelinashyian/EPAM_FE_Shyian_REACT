@@ -1,9 +1,11 @@
 export const SET_MOVIES = 'SET_MOVIES';
+export const MOVIES_LOADING_START = 'MOVIES_LOADING_START';
+export const MOVIES_DATA_ERROR = 'MOVIES_DATA_ERROR';
+export const SET_SELECTED_MOVIE = 'SET_SELECTED_MOVIE';
 export const SET_LIKES = 'SET_LIKES';
 export const SET_RATING = 'SET_RATING';
 export const SORT_BY_RATING = 'SORT_BY_RATING';
 export const SORT_BY_LIKES = 'SORT_BY_LIKES';
 export const SET_SEARCH_VALUE = 'SET_SEARCH_VALUE';
 export const SET_ACTORS = 'SET_ACTORS';
-export const DELETE_MOVIE = 'DELETE_MOVIE';
-export const EDIT_MOVIE = 'EDIT_MOVIE';
+export const SET_SELECTED_ACTOR = 'SET_SELECTED_ACTOR';

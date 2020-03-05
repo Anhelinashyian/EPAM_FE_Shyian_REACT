@@ -2,12 +2,12 @@ import React from 'react';
 import styles from './MovieInformation.module.scss';
 import MovieRating from '../../../components/MovieRating/MovieRating';
 import PropTypes from 'prop-types';
-import {withRouter} from "react-router";
+import {withRouter} from 'react-router';
 
 class MovieInformation extends React.Component {
   onDeleteClick = () => {
-    this.props.deleteMovie(this.props.movie.id);
-    this.props.history.push('/movies');
+    this.props.deleteMovie(this.props.movie.id)
+      .then(() => this.props.history.push('/movies'));
   };
 
   onEditClick = () => {

@@ -4,25 +4,23 @@ import MovieRating from '../../../components/MovieRating/MovieRating';
 import {ReactComponent as LikeIcon} from '../../../assets/svg/Like.svg';
 import {ReactComponent as DislikeIcon} from '../../../assets/svg/Dislike.svg';
 import PropTypes from 'prop-types';
+import {withRouter} from 'react-router';
 
 class MoviePreview extends React.Component {
   onTitleClick = () => {
-    this.props.setSelected(this.props.movie.id);
+    this.props.history.push(`/movie/${this.props.movie.id}`);
   };
 
   onLikeClick = () => {
-    this.props.setLikes({id: this.props.movie.id, likes: ++this.props.movie.likes});
+    this.props.updateLikes({...this.props.movie, likes: ++this.props.movie.likes});
   };
 
   onDislikeClick = () => {
-    this.props.setLikes({id: this.props.movie.id, likes: --this.props.movie.likes});
+    this.props.updateLikes({...this.props.movie, likes: --this.props.movie.likes});
   };
 
   onRatingSelect = (rating) => {
-    this.props.setRating({
-      id: this.props.movie.id,
-      stars: rating,
-    });
+    this.props.updateRating({...this.props.movie, stars: rating});
   };
 
   render() {
@@ -63,6 +61,8 @@ MoviePreview.propTypes = {
     director: PropTypes.string,
     description: PropTypes.string,
   }),
-  setRating: PropTypes.func,
-  setLikes: PropTypes.func,
+  updateRating: PropTypes.func,
+  updateLikes: PropTypes.func,
 };
+
+export default withRouter(MoviePreview);

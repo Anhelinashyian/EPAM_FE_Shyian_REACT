@@ -1,12 +1,12 @@
 import React from 'react';
 import Header from '../../components/Header/Header';
-import styles from './LogIn.module.scss';
+import styles from './Registration.module.scss';
 import Alert from '../../components/Alert/Alert';
 import {withRouter} from 'react-router';
 import {Link} from 'react-router-dom';
 import * as client from '../../utils/model/model';
 
-class LogIn extends React.Component {
+class Registration extends React.Component {
   constructor(props) {
     super(props);
 
@@ -25,10 +25,6 @@ class LogIn extends React.Component {
     this.setState({message: null});
   };
 
-  setCurrentUser = (name) => {
-    localStorage.setItem('currentUser', name);
-  };
-
   onSubmitClick = async (event) => {
     event.preventDefault();
     this.hideAlert();
@@ -40,10 +36,13 @@ class LogIn extends React.Component {
       const userExists = data.length;
 
       if (userExists) {
-        this.setCurrentUser(this.state.name);
-        this.props.history.push('/movies');
+        this.setState({message: 'Name already exists. Please log in'});
       } else {
-        this.showAlert('Unknown user. Please register');
+        await client.addNewUser({
+          name: this.state.name,
+          password: this.state.password,
+        });
+        this.props.history.push('/login');
       }
     }
   };
@@ -62,20 +61,20 @@ class LogIn extends React.Component {
 
     return <div className={styles.wrapper}>
       <Header/>
-      <h1 className={styles.title}>Please log in</h1>
+      <h1 className={styles.title}>Please register</h1>
       <Alert show={alertVisible}>
         <p className={styles.message}>{alertMessage}</p>
       </Alert>
       <form className={styles.form}>
         <input onChange={this.onNameChange} className={styles.form__field} type='text' placeholder='Enter your name'/>
         <input onChange={this.onPasswordChange} className={styles.form__field} type='password'
-          placeholder='Enter your password'/>
-        <button onClick={this.onSubmitClick} className={`${styles.btn} ${styles['btn-primary']}`}>Log In</button>
+               placeholder='Enter your password'/>
+        <button onClick={this.onSubmitClick} className={`${styles.btn} ${styles['btn-primary']}`}>Register</button>
       </form>
-      <p className={styles.info}>Do not have an account? Go to<Link to='/registration'><span className={styles.link}> Register page</span></Link>
+      <p className={styles.info}>Already have an account? Go to <Link to='/logIn'><span className={styles.link}>Login page</span></Link>
       </p>
     </div>;
   }
 }
 
-export default withRouter(LogIn);
+export default withRouter(Registration);

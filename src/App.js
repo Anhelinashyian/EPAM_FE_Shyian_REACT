@@ -1,18 +1,18 @@
 import React from 'react';
-import AppContainer from './containers/AppContainer/index';
 import {Provider} from 'react-redux';
 import {configureStore} from './store/configureStore';
+import {BrowserRouter, Route, Switch, Redirect} from 'react-router-dom';
+import MovieContainer from './containers/MovieContainer';
+import MovieInfoContainer from './containers/MovieInfoContainer/index';
+import Registration from './features/Registration/Registration';
+import LogIn from './features/LogIn/LogIn';
+import PrivateRoute from './utils/PrivatRoute/PrivateRoute';
+import MovieEditContainer from './containers/MovieEditContainer';
+import ActorsInfoContainer from './containers/ActorInfoContainer/index';
 
 const store = configureStore();
 
 class App extends React.Component {
-  componentDidMount() {
-    fetch('/json/films.json').then((response) => response.json()).then((data) => {
-      store.dispatch(setMovies(data.movies));
-      store.dispatch(setActors(data.actors));
-    });
-  }
-
   render() {
     return <Provider store={store}>
       <BrowserRouter>
