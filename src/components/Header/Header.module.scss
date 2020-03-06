@@ -1,0 +1,20 @@
+@import "../../common/common";
+@import "../../../node_modules/bootstrap-sass/assets/stylesheets/bootstrap/buttons";
+
+.header {
+  height: 5em;
+  background-color: $light-gray;
+  box-shadow: 0 0.1em 1em grey;
+}
+
+.header__title {
+  font-size: 2em;
+  text-align: center;
+  line-height: 2em;
+}
+
+.btn {
+  position: absolute;
+  top: 2%;
+  left: 90%;
+}
