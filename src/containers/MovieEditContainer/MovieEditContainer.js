@@ -19,7 +19,7 @@ export default class MovieEditContainer extends React.Component {
     const {selectedMovie, fetchSelectedMovie} = this.props;
 
     return <div className={`${styles.container} ${styles.wrapper}`}>
-      <Header logOut='logout' movies='movies'/>
+      <Header logOut='logout'/>
       <div className={styles.row}>
         <div className={`${styles.col_4} ${styles.film__container}`}>
           {selectedMovie

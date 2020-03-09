@@ -5,6 +5,7 @@ import Alert from '../../components/Alert/Alert';
 import {withRouter} from 'react-router';
 import {Link} from 'react-router-dom';
 import * as client from '../../utils/model/model';
+import withTranslation from "../../hocs/withTranslation";
 
 class LogIn extends React.Component {
   constructor(props) {
@@ -30,11 +31,12 @@ class LogIn extends React.Component {
   };
 
   onSubmitClick = async (event) => {
+    const {labels} = this.props;
     event.preventDefault();
     this.hideAlert();
 
     if (this.state.name.length < 3 || this.state.password.length < 3) {
-      this.showAlert('Name and password must be at least 3 symbols');
+      this.showAlert(labels['authorization-form-validation']);
     } else {
       const {data} = await client.getUser({name: this.state.name, password: this.state.password});
       const userExists = data.length;
@@ -43,7 +45,7 @@ class LogIn extends React.Component {
         this.setCurrentUser(this.state.name);
         this.props.history.push('/movies');
       } else {
-        this.showAlert('Unknown user. Please register');
+        this.showAlert(labels['authorization-unknown-user']);
       }
     }
   };
@@ -59,23 +61,27 @@ class LogIn extends React.Component {
   render() {
     const alertMessage = this.state.message;
     const alertVisible = alertMessage !== null;
+    const {labels} = this.props;
 
     return <div className={styles.wrapper}>
       <Header/>
-      <h1 className={styles.title}>Please log in</h1>
+      <h1 className={styles.title}>{labels['login-title']}</h1>
       <Alert show={alertVisible}>
         <p className={styles.message}>{alertMessage}</p>
       </Alert>
       <form className={styles.form}>
-        <input onChange={this.onNameChange} className={styles.form__field} type='text' placeholder='Enter your name'/>
+        <input onChange={this.onNameChange} className={styles.form__field} type='text'
+               placeholder={labels['authorization-name-placeholder']}/>
         <input onChange={this.onPasswordChange} className={styles.form__field} type='password'
-          placeholder='Enter your password'/>
-        <button onClick={this.onSubmitClick} className={`${styles.btn} ${styles['btn-primary']}`}>Log In</button>
+               placeholder={labels['authorization-password-placeholder']}/>
+        <button onClick={this.onSubmitClick}
+                className={`${styles.btn} ${styles['btn-primary']}`}>{labels['login-submit']}</button>
       </form>
-      <p className={styles.info}>Do not have an account? Go to<Link to='/registration'><span className={styles.link}> Register page</span></Link>
+      <p className={styles.info}>{labels['registration-redirect']}<Link to='/registration'><span
+        className={styles.link}>{labels['login-redirect-link']}</span></Link>
       </p>
     </div>;
   }
 }
 
-export default withRouter(LogIn);
+export default withTranslation(withRouter(LogIn));

@@ -1,17 +1,23 @@
 import React from 'react';
 import styles from './ActorInformation.module.scss';
 import PropTypes from 'prop-types';
+import withTranslation from "../../hocs/withTranslation";
+import {withRouter} from "react-router";
 
-export default class ActorInformation extends React.Component {
+class ActorInformation extends React.Component {
   render() {
-    const {actor} = this.props;
+    const {actor, labels} = this.props;
     return (
       <div className={styles.actor}>
         <img className={styles.actor__poster} src={actor.imgUrl} alt={actor.name}/>
-        <div className={styles.actor__info}><span
-          className={styles.actor__info_bold}>Name:</span><span>{actor.name}</span></div>
-        <div className={styles.actor__info}><span
-          className={styles.actor__info_bold}>Biography:</span><span>{actor.biography}</span></div>
+        <div className={styles.actor__info}>
+          <span className={styles.actor__info_bold}>{labels['actor-name']}</span>
+          <span>{actor.name}</span>
+        </div>
+        <div className={styles.actor__info}>
+          <span className={styles.actor__info_bold}>{labels['actor-biography']}</span>
+          <span>{actor.biography}</span>
+        </div>
       </div>
     );
   }
@@ -25,3 +31,5 @@ ActorInformation.propTypes = {
     description: PropTypes.string,
   })
 };
+
+export default withTranslation(withRouter(ActorInformation));

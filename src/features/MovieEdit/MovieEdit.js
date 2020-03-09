@@ -3,6 +3,7 @@ import styles from './MovieEdit.module.scss';
 import {withRouter} from 'react-router';
 import * as client from '../../utils/model/model';
 import PropTypes from 'prop-types';
+import withTranslation from '../../hocs/withTranslation';
 
 class MovieEdit extends React.Component {
   constructor(props) {
@@ -66,25 +67,26 @@ class MovieEdit extends React.Component {
   };
 
   render() {
+    const {labels} = this.props;
     const selected = this.state.selected;
     return <form className={styles.form}>
       <div className={styles.control}>
-        <label htmlFor='title'>Title</label>
+        <label htmlFor='title'>{labels['movie-edit-title']}</label>
         <input className={styles.field} id='title' type='text' required='required' value={selected.title}
                onChange={this.onTitleChange}/>
       </div>
       <div className={styles.control}>
-        <label htmlFor='img'>Img URL</label>
+        <label htmlFor='img'>{labels['movie-edit-imgUrl']}</label>
         <input className={styles.field} id='img' type='text' required='required' value={selected.posterUrl}
                onChange={this.onPosterUrlChange}/>
       </div>
       <div className={styles.control}>
-        <label htmlFor='director'>Director</label>
+        <label htmlFor='director'>{labels['movie-edit-director']}</label>
         <input className={styles.field} id='director' type='text' required='required' value={selected.director}
                onChange={this.onDirectorChange}/>
       </div>
       <div className={styles.control}>
-        <label htmlFor='genres'>Genres</label>
+        <label htmlFor='genres'>{labels['movie-edit-genres']}</label>
         <select className={styles.field} id='genres' multiple='multiple' required='required'
                 onChange={this.ondGenresChange}>
           <option>Drama</option>
@@ -95,13 +97,17 @@ class MovieEdit extends React.Component {
         </select>
       </div>
       <div className={styles.control}>
-        <label htmlFor='description'>Description</label>
+        <label htmlFor='description'>{labels['movie-edit-description']}</label>
         <textarea onChange={this.onDescriptionChange} className={styles.field} id='description'
                   value={selected.description}/>
       </div>
       <div className={styles.buttons}>
-        <button onClick={this.onSubmitClick} className={`${styles.btn} ${styles['btn-primary']}`}>Submit</button>
-        <button onClick={this.onGoBackClick} className={`${styles.btn} ${styles['btn-primary']}`}>Go Back</button>
+        <button onClick={this.onSubmitClick} className={`${styles.btn} ${styles['btn-primary']}`}>
+          {labels['movie-edit-submit']}
+        </button>
+        <button onClick={this.onGoBackClick} className={`${styles.btn} ${styles['btn-primary']}`}>
+          {labels['movie-edit-return']}
+        </button>
       </div>
     </form>;
   }
@@ -119,5 +125,6 @@ MovieEdit.propTypes = {
     director: PropTypes.string,
     description: PropTypes.string,
   }),
-}
-export default withRouter(MovieEdit);
+};
+
+export default withTranslation(withRouter(MovieEdit));

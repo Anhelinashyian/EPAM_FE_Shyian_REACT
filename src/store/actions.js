@@ -10,6 +10,7 @@ import {
   MOVIES_DATA_ERROR,
   SET_SELECTED_MOVIE,
   SET_SELECTED_ACTOR,
+  SET_ACTIVE_LANGUAGE,
 } from './types';
 
 import * as client from '../utils/model/model';
@@ -63,6 +64,11 @@ export const setSearchValue = (payload) => ({
 
 export const setActors = (payload) => ({
   type: SET_ACTORS,
+  payload,
+});
+
+export const setActiveLanguage = (payload) => ({
+  type: SET_ACTIVE_LANGUAGE,
   payload,
 });
 

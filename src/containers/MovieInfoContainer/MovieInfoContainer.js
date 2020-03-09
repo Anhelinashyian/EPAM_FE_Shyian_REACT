@@ -30,7 +30,7 @@ export default class MovieInfoContainer extends React.Component {
     const {actors, deleteMovie, selectedMovie} = this.props;
 
     return <div className={styles.wrapper}>
-      <Header logOut='logout' movies='movies'/>
+      <Header logOut='logout'/>
       <div className={styles.row}>
         <div>
           {selectedMovie

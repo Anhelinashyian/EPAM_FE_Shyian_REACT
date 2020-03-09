@@ -3,9 +3,9 @@ import styles from './MovieContainer.module.scss';
 import Header from '../../components/Header/Header';
 import PropTypes from 'prop-types';
 import MoviePreview from '../../features/MovieList/MoviePreview/MoviePreview';
-import {fetchAllMovies} from "../../store/actions";
+import withTranslation from "../../hocs/withTranslation";
 
-export default class MovieContainer extends React.Component {
+class MovieContainer extends React.Component {
   componentDidMount() {
     this.props.fetchAllMovies();
   }
@@ -34,6 +34,7 @@ export default class MovieContainer extends React.Component {
   };
 
   getMovieList = () => {
+    const {labels} = this.props;
     const allMovies = this.getMovies();
 
     return allMovies
@@ -47,30 +48,31 @@ export default class MovieContainer extends React.Component {
           />,
         )},
       </div>
-      : <div>There is no films</div>;
+      : <div>{labels['movie-no-films']}</div>;
   };
 
   render() {
-    const {loading, error} = this.props;
+    const {loading, error, labels} = this.props;
     if (error) {
-      return <div>Something is wrong...</div>
+      return <div>{labels['movie-error']}</div>
     }
 
     return <div className={`${styles.container} ${styles.wrapper}`}>
       <Header logOut='logout'/>
       <div className={styles.row}>
         <div className={`${styles.col_11} ${styles.menu__container}`}>
-          <h1 className={styles.sort__title}>Sort movies</h1>
+          <h1 className={styles.sort__title}>{labels['movie-sort-title']}</h1>
           <div className={styles['btn-container']}>
             <button onClick={this.onClickByLike} className={`${styles.btn} ${styles['btn-primary']}`}>
-              By likes
+              {labels['movie-sort-by-likes']}
             </button>
             <button onClick={this.onClickByRating} className={`${styles.btn} ${styles['btn-primary']}`}>
-              By rating
+              {labels['movie-sort-by-rating']}
             </button>
           </div>
-          <input className={styles.search} type='search' placeholder='Search by name' onInput={this.onSearchInput}/>
-          {loading ? <h1>Loading...</h1> : this.getMovieList()}
+          <input className={styles.search} type='search' placeholder={labels['movie-search-placeholder']}
+                 onInput={this.onSearchInput}/>
+          {loading ? <h1>{labels['movie-loading']}</h1> : this.getMovieList()}
         </div>
       </div>
     </div>;
@@ -89,3 +91,5 @@ MovieContainer.propTypes = {
   loading: PropTypes.bool,
   fetchAllMovies: PropTypes.func,
 };
+
+export default withTranslation(MovieContainer);

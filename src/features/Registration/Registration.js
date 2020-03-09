@@ -5,6 +5,7 @@ import Alert from '../../components/Alert/Alert';
 import {withRouter} from 'react-router';
 import {Link} from 'react-router-dom';
 import * as client from '../../utils/model/model';
+import withTranslation from "../../hocs/withTranslation";
 
 class Registration extends React.Component {
   constructor(props) {
@@ -26,17 +27,18 @@ class Registration extends React.Component {
   };
 
   onSubmitClick = async (event) => {
+    const {labels} = this.props;
     event.preventDefault();
     this.hideAlert();
 
     if (this.state.name.length < 3 || this.state.password.length < 3) {
-      this.showAlert('Name and password must be at least 3 symbols');
+      this.showAlert(labels['authorization-form-validation']);
     } else {
       const {data} = await client.getUser({name: this.state.name, password: this.state.password});
       const userExists = data.length;
 
       if (userExists) {
-        this.setState({message: 'Name already exists. Please log in'});
+        this.setState({message: labels['authorization-existing-user']});
       } else {
         await client.addNewUser({
           name: this.state.name,
@@ -56,25 +58,31 @@ class Registration extends React.Component {
   };
 
   render() {
+    const {labels} = this.props;
     const alertMessage = this.state.message;
     const alertVisible = alertMessage !== null;
 
     return <div className={styles.wrapper}>
       <Header/>
-      <h1 className={styles.title}>Please register</h1>
+      <h1 className={styles.title}>{labels['registration-title']}</h1>
       <Alert show={alertVisible}>
         <p className={styles.message}>{alertMessage}</p>
       </Alert>
       <form className={styles.form}>
-        <input onChange={this.onNameChange} className={styles.form__field} type='text' placeholder='Enter your name'/>
+        <input onChange={this.onNameChange} className={styles.form__field} type='text'
+               placeholder={labels['authorization-name-placeholder']}/>
         <input onChange={this.onPasswordChange} className={styles.form__field} type='password'
-               placeholder='Enter your password'/>
-        <button onClick={this.onSubmitClick} className={`${styles.btn} ${styles['btn-primary']}`}>Register</button>
+               placeholder={labels['authorization-password-placeholder']}/>
+        <button onClick={this.onSubmitClick}
+                className={`${styles.btn} ${styles['btn-primary']}`}>{labels['registration-submit']}</button>
       </form>
-      <p className={styles.info}>Already have an account? Go to <Link to='/logIn'><span className={styles.link}>Login page</span></Link>
+      <p className={styles.info}>{labels['registration-redirect']}
+      <Link to='/logIn'>
+        <span className={styles.link}>{labels['registration-redirect-link']}</span>
+      </Link>
       </p>
     </div>;
   }
 }
 
-export default withRouter(Registration);
+export default withTranslation(withRouter(Registration));
