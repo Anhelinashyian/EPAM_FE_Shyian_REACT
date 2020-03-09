@@ -1,6 +1,6 @@
 import {connect} from 'react-redux';
 import LanguageSwitcher from './LanguageSwitcher';
-import {setActiveLanguage} from '../../store/actions'
+import {setActiveLanguage} from '../../store/actions';
 
 const mapStateToProps = (state) => ({
   active: state.switchLanguageReducer.active,

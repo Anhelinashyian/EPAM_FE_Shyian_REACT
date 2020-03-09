@@ -83,6 +83,7 @@ MovieInformation.propTypes = {
   }),
   actors: PropTypes.arrayOf(PropTypes.object),
   deleteMovie: PropTypes.func,
+  labels: PropTypes.object,
 };
 
 export default withTranslation(withRouter(MovieInformation));

@@ -5,7 +5,8 @@ import Alert from '../../components/Alert/Alert';
 import {withRouter} from 'react-router';
 import {Link} from 'react-router-dom';
 import * as client from '../../utils/model/model';
-import withTranslation from "../../hocs/withTranslation";
+import withTranslation from '../../hocs/withTranslation';
+import PropTypes from 'prop-types';
 
 class Registration extends React.Component {
   constructor(props) {
@@ -77,12 +78,16 @@ class Registration extends React.Component {
                 className={`${styles.btn} ${styles['btn-primary']}`}>{labels['registration-submit']}</button>
       </form>
       <p className={styles.info}>{labels['registration-redirect']}
-      <Link to='/logIn'>
-        <span className={styles.link}>{labels['registration-redirect-link']}</span>
-      </Link>
+        <Link to='/logIn'>
+          <span className={styles.link}>{labels['registration-redirect-link']}</span>
+        </Link>
       </p>
     </div>;
   }
 }
+
+Registration.propTypes = {
+  labels: PropTypes.object,
+};
 
 export default withTranslation(withRouter(Registration));

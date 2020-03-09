@@ -3,7 +3,6 @@ import Header from '../../components/Header/Header';
 import styles from './MovieInfoContainer.module.scss';
 import MovieInformation from '../../features/MovieInfo/MovieInformation/MovieInformation';
 import PropTypes from 'prop-types';
-import {fetchAllActors, fetchSelectedMovie} from "../../store/actions";
 
 export default class MovieInfoContainer extends React.Component {
   getFilteredActors = (movie, actors) => {
@@ -45,7 +44,7 @@ export default class MovieInfoContainer extends React.Component {
   }
 }
 
-MovieInformation.propTypes = {
+MovieInfoContainer.propTypes = {
   selectedMovie: PropTypes.shape({
     id: PropTypes.number,
     title: PropTypes.string,

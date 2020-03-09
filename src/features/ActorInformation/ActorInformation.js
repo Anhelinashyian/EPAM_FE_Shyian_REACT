@@ -29,7 +29,8 @@ ActorInformation.propTypes = {
     posterUrl: PropTypes.string,
     name: PropTypes.string,
     description: PropTypes.string,
-  })
+  }),
+  labels: PropTypes.object,
 };
 
 export default withTranslation(withRouter(ActorInformation));

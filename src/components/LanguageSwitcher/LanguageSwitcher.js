@@ -1,6 +1,7 @@
 import React from 'react';
 import classNames from 'classnames';
 import './LanguageSwitcher.scss';
+import PropTypes from 'prop-types';
 
 export default class LanguageSwitcher extends React.Component {
   isActive = (language) => {
@@ -16,7 +17,7 @@ export default class LanguageSwitcher extends React.Component {
     return <div className='btn-container'>
       <LanguageButton language='EN' active={this.isActive('EN')} setActive={this.setActive}/>
       <LanguageButton language='UA' active={this.isActive('UA')} setActive={this.setActive}/>
-    </div>
+    </div>;
   }
 }
 
@@ -33,3 +34,10 @@ class LanguageButton extends React.Component {
     return <button onClick={this.onBtnClick} className={btnClass}>{this.props.language}</button>
   }
 }
+
+LanguageSwitcher.propTypes = {
+  active: PropTypes.string,
+  setActive: PropTypes.func,
+  setActiveLanguage: PropTypes.func,
+  language: PropTypes.string,
+};

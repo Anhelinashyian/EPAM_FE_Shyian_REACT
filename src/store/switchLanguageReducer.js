@@ -1,7 +1,7 @@
-import {SET_ACTIVE_LANGUAGE} from "./types";
+import {SET_ACTIVE_LANGUAGE} from './types';
 
 const initialState = {
-  active: "EN",
+  active: 'EN',
 };
 
 export const switchLanguageReducer = (state = initialState, action) => {

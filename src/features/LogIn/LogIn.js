@@ -5,7 +5,8 @@ import Alert from '../../components/Alert/Alert';
 import {withRouter} from 'react-router';
 import {Link} from 'react-router-dom';
 import * as client from '../../utils/model/model';
-import withTranslation from "../../hocs/withTranslation";
+import withTranslation from '../../hocs/withTranslation';
+import PropTypes from 'prop-types';
 
 class LogIn extends React.Component {
   constructor(props) {
@@ -84,4 +85,7 @@ class LogIn extends React.Component {
   }
 }
 
+LogIn.propTypes = {
+  labels: PropTypes.object,
+};
 export default withTranslation(withRouter(LogIn));

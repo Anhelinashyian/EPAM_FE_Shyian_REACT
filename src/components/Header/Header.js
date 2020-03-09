@@ -2,7 +2,7 @@ import React from 'react';
 import styles from './Header.module.scss';
 import {withRouter} from 'react-router-dom';
 import PropTypes from 'prop-types';
-import LanguageSwitcher from "../LanguageSwitcher/index";
+import LanguageSwitcher from '../LanguageSwitcher/index';
 import withTranslation from '../../hocs/withTranslation';
 
 class Header extends React.Component {
@@ -12,7 +12,6 @@ class Header extends React.Component {
   };
 
   render() {
-    debugger
     const {logOut, labels} = this.props;
     return <div className={styles.row}>
       <header className={styles.header}>
@@ -29,6 +28,7 @@ class Header extends React.Component {
 
 Header.propTypes = {
   logOut: PropTypes.string,
+  labels: PropTypes.object,
 };
 
 export default withTranslation(withRouter(Header));

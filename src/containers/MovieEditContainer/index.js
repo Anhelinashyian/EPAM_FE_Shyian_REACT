@@ -1,6 +1,7 @@
 import {connect} from 'react-redux';
 import MovieEditContainer from './MovieEditContainer';
 import {fetchSelectedMovie} from '../../store/actions';
+import {withRouter} from "react-router";
 
 const mapStateToProps = (state) => {
   return ({
@@ -14,4 +15,4 @@ const mapDispatchToProps = {
 
 const withConnect = connect(mapStateToProps, mapDispatchToProps);
 
-export default withConnect(MovieEditContainer);
+export default withRouter(withConnect(MovieEditContainer));

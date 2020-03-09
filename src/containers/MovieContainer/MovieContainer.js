@@ -3,7 +3,7 @@ import styles from './MovieContainer.module.scss';
 import Header from '../../components/Header/Header';
 import PropTypes from 'prop-types';
 import MoviePreview from '../../features/MovieList/MoviePreview/MoviePreview';
-import withTranslation from "../../hocs/withTranslation";
+import withTranslation from '../../hocs/withTranslation';
 
 class MovieContainer extends React.Component {
   componentDidMount() {
@@ -54,7 +54,7 @@ class MovieContainer extends React.Component {
   render() {
     const {loading, error, labels} = this.props;
     if (error) {
-      return <div>{labels['movie-error']}</div>
+      return <div>{labels['movie-error']}</div>;
     }
 
     return <div className={`${styles.container} ${styles.wrapper}`}>
@@ -90,6 +90,7 @@ MovieContainer.propTypes = {
   error: PropTypes.bool,
   loading: PropTypes.bool,
   fetchAllMovies: PropTypes.func,
+  labels: PropTypes.object,
 };
 
 export default withTranslation(MovieContainer);
