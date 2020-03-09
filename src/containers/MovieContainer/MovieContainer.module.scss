@@ -1,0 +1,56 @@
+@import "../../common/common";
+@import "../../../node_modules/bootstrap-sass/assets/stylesheets/bootstrap/buttons";
+@import "../../../node_modules/bootstrap-sass/assets/stylesheets/bootstrap/alerts";
+
+.col_4 {
+  @include make-lg-column(4);
+}
+
+.col_11 {
+  @include make-lg-column(12);
+
+  margin: auto;
+}
+
+.btn-container {
+  text-align: center;
+}
+
+.btn {
+  margin: 1em;
+}
+
+.alert {
+  margin-top: 12em;
+}
+
+.sort__title {
+  text-align: center;
+  font-size: 2em;
+}
+
+.wrapper {
+  width: 100%;
+}
+
+.menu__container {
+  margin-top: 2em;
+}
+
+.search {
+  width: 50%;
+  box-sizing: border-box;
+  height: 3em;
+  border: 1px solid #4d4949;
+  border-radius: 5px;
+  padding: 0.7em;
+  margin: auto;
+  outline: none;
+  display: block;
+}
+
+.menu__list {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: flex-start;
+}

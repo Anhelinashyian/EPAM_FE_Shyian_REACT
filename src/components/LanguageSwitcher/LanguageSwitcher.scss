@@ -1,0 +1,21 @@
+.btn {
+  height: 2.7em;
+  width: 5em;
+  margin: 0 0.3em;
+  background-color: lightgray;
+  border: 1px solid gray;
+  border-radius: 0.6em;
+  outline: none;
+}
+
+.btn-container {
+  position: absolute;
+  top: 1.7%;
+  left: 5%;
+}
+
+.active {
+  background-color: white;
+  box-shadow: 0 0 5px rgba(6, 103, 207, 1);
+  border: 1px solid lightgray;
+}
